@@ -13,7 +13,7 @@ const CustomModal: React.FC = () => {
         if (value === 'false' || value === null) {
           setIsVisible(true);
         } else {
-            setIsVisible(false);
+          setIsVisible(false);
           setShouldShowAgain(value === 'true');
         }
       })

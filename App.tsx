@@ -63,7 +63,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeStack} />
+        <Drawer.Screen name="Home" component={HomeStack} options={{ unmountOnBlur: true }}/>
         <Drawer.Screen name="Profile" component={ProfileScreen} />
         <Drawer.Screen name="Settings" component={SettingsScreen} />
       </Drawer.Navigator>
