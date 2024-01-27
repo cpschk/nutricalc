@@ -1,8 +1,13 @@
 // HomeScreen.tsx
 // import React, { useState } from 'react';
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['new NativeEventEmitter']);
+
+import * as React from 'react';
 import { View, Text, ImageBackground, TouchableOpacity,  TextInput, Button, ScrollView } from 'react-native';
 import { homeStyles } from '../styles/HomeScreenStyle';
 import { Icon } from 'react-native-elements';
+import { Video, ResizeMode } from 'expo-av';
 
 const HomeScreen = ({ navigation }) => {
   const navigateToNextScreen = (id) => {
@@ -18,13 +23,23 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground
-      source={require('../assets/enhanced-image.png')} // Reemplaza con la ruta correcta de tu imagen
-      // source={require('../assets/paper-fruits.png')} // Reemplaza con la ruta correcta de tu imagen
-      // source={require('../assets/clay-tree-enhanced-image.jpg')} // Reemplaza con la ruta correcta de tu imagen
-      style={homeStyles.backgroundImage}
-    >
+    // <ImageBackground
+    //   source={require('../assets/enhanced-image.png')} // Reemplaza con la ruta correcta de tu imagen
+    //   // source={require('../assets/paper-fruits.png')} // Reemplaza con la ruta correcta de tu imagen
+    //   // source={require('../assets/clay-tree-enhanced-image.jpg')} // Reemplaza con la ruta correcta de tu imagen
+    //   style={homeStyles.backgroundImage}
+    // >
     <View style={homeStyles.container}>
+      <Video
+        source={require('../assets/tree.mp4')}
+        style={homeStyles.backgroundVideo}
+        rate={1.0}
+        shouldPlay={true}
+        isLooping={true}
+        volume={1.0}
+        isMuted={true}
+        resizeMode={ResizeMode.COVER}
+      />
 
       <View>
         <Text style={homeStyles.textHeader}>Bienvenido</Text>
@@ -72,8 +87,9 @@ const HomeScreen = ({ navigation }) => {
       </View>
       
     </View>
-    </ImageBackground>
+    // </ImageBackground>
   );
 };
+
 
 export default HomeScreen;

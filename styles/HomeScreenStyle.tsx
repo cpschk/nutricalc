@@ -1,15 +1,29 @@
 import { StyleSheet } from 'react-native';
 
 export const homeStyles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-  },
+  // backgroundImage: {
+  //   flex: 1,
+  //   resizeMode: 'cover',
+  //   justifyContent: 'center',
+  // },
+  // container: {
+  //   ...StyleSheet.absoluteFillObject,
+  //   backgroundColor: 'rgba(0, 0, 0, 0.3)',
+  //   alignItems: 'center',
+  // },
   container: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#ecf0f1',
     alignItems: 'center',
+    padding: 8,
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
   textHeader: {
     marginTop: 30,
