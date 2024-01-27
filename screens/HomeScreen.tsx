@@ -31,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
     // >
     <View style={homeStyles.container}>
       <Video
-        source={require('../assets/tree.mp4')}
+        source={require('../assets/tree3.mp4')}
         style={homeStyles.backgroundVideo}
         rate={1.0}
         shouldPlay={true}
