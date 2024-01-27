@@ -9,11 +9,11 @@ const HomeScreen = ({ navigation }) => {
     if (id === 'calcula') {
       navigation.navigate('ImcTmbCalculate');
     } else if (id === 'aprende') {
-      navigation.navigate('ResultScreen');
+      navigation.navigate('LearnInfo');
     } else if (id === 'descubre') {
-      navigation.navigate('ResultScreen');
+      navigation.navigate('LearnInfo');
     } else if (id === 'mejora') {
-      navigation.navigate('ResultScreen');
+      navigation.navigate('LearnInfo');
     }
   };
 

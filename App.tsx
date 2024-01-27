@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from './screens/HomeScreen';
-import ResultScreen from './screens/ResultScreen';
+import LearnInfo from './screens/LearnScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import ImcTmbCalculate from './screens/ImcTmbScreen';
@@ -30,8 +30,8 @@ const HomeStack = () => (
       }}
     />
     <Stack.Screen
-      name="ResultScreen"
-      component={ResultScreen}
+      name="LearnInfo"
+      component={LearnInfo}
       options={{
         headerBackTitle: 'Volver', 
         headerTitle: '',
