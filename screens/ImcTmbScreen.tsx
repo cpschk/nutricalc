@@ -11,15 +11,15 @@ const ImcTmbCalculate = () => {
   const [peso, setPeso] = useState<number>(0);
   const [edad, setEdad] = useState<string>('');
   const [rangoIMC, setrangoIMC] = useState<string>('');
-  const [genero, setGenero] = useState<string>('masculino');
-  const [nivelActividad, setNivelActividad] = useState<string>('sedentario');
+  const [genero, setGenero] = useState<string>('-');
+  const [nivelActividad, setNivelActividad] = useState<string>('-');
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [imc, setBmi] = useState<number | null>(null);
   const [tmbResult, setTmbResult] = useState<number | null>(null);
   const [caloriesWithActivity, setCaloriesWithActivity] = useState<string | null>(null);
 
   const validarCampo = (campo: string, mensaje: string) => {
-    if (!campo) {
+    if (!campo || campo === "-" || campo === "0") {
       alert(mensaje);
       return false;
     }
@@ -34,17 +34,17 @@ const ImcTmbCalculate = () => {
       calculatedTmb = 447.593 + 9.247 * peso + 3.098 * estatura - 4.330 * edad;
     }
     setTmbResult(calculatedTmb);
-    
+    calculateCaloriesWithActivity(calculatedTmb); // Llama a la función aquí
   };
-
-  const calculateCaloriesWithActivity = useCallback(() => {
+  
+  const calculateCaloriesWithActivity = (tmbResult: number) => {
     const activityFactors = {
       'sedentario': 1.2,
       'ligero': 1.375,
       'moderado': 1.55,
       'intenso': 1.725,
     };
-
+  
     if (activityFactors.hasOwnProperty(nivelActividad)) {
       const activityFactor = activityFactors[nivelActividad];
       if (tmbResult !== null && tmbResult !== undefined) {
@@ -56,7 +56,7 @@ const ImcTmbCalculate = () => {
     } else {
       console.error('Nivel de actividad física no válido.');
     }
-  }, [tmbResult, nivelActividad, setCaloriesWithActivity]);
+  };
 
   const determinarRangoIMC = (imc: number): string => {
     if (imc < 18.5) {
@@ -78,13 +78,14 @@ const ImcTmbCalculate = () => {
     if (!validarCampo(estatura.toString(), 'Por favor, ingrese la estatura.')) return;
     if (!validarCampo(peso.toString(), 'Por favor, ingrese el peso.')) return;
     if (!validarCampo(edad, 'Por favor, ingrese la edad.')) return;
+    if (!validarCampo(genero, 'Por favor, selecciona genero.')) return;
+    if (!validarCampo(nivelActividad, 'Por favor, selecciona nivel de actividad fisica.')) return;
 
     const bmi = peso / ((estatura / 100) * (estatura / 100));
 
     setBmi(bmi);
     setrangoIMC(determinarRangoIMC(bmi));
     calcularTmb(genero, peso, estatura, Number(edad));
-    calculateCaloriesWithActivity();
 
     // console.log('Estatura:', estatura);
     // console.log('Peso:', peso);
@@ -104,7 +105,14 @@ const ImcTmbCalculate = () => {
             keyboardType="numeric"
             placeholder="Ingrese la estatura"
             value={estatura.toString()}
-            onChangeText={(text) => setEstatura(parseFloat(text))}
+            // onChangeText={(text) => setEstatura(parseFloat(text))}
+            onChangeText={(text) => {
+              let num = parseFloat(text);
+              if (isNaN(num)) {
+                num = 0; // or a default value
+              }
+              setEstatura(num);
+            }}
           />
 
           <Text style={ImcTmbStyles.label}>Peso (kg):</Text>
@@ -113,7 +121,14 @@ const ImcTmbCalculate = () => {
             keyboardType="numeric"
             placeholder="Ingrese el peso"
             value={peso.toString()}
-            onChangeText={(text) => setPeso(parseFloat(text))}
+            // onChangeText={(text) => setPeso(parseFloat(text))}
+            onChangeText={(text) => {
+              let num = parseFloat(text);
+              if (isNaN(num)) {
+                num = 0; // or a default value
+              }
+              setPeso(num);
+            }}
           />
 
           <Text style={ImcTmbStyles.label}>Edad:</Text>
@@ -131,6 +146,7 @@ const ImcTmbCalculate = () => {
             onValueChange={(itemValue) => setGenero(itemValue)}
             style={ImcTmbStyles.picker}
           >
+            <Picker.Item label="None" value="-" />
             <Picker.Item label="Masculino" value="masculino" />
             <Picker.Item label="Femenino" value="femenino" />
           </Picker>
@@ -141,6 +157,7 @@ const ImcTmbCalculate = () => {
             onValueChange={(itemValue) => setNivelActividad(itemValue)}
             style={ImcTmbStyles.picker}
           >
+            <Picker.Item label="None" value="-" />
             <Picker.Item label="Sedentario" value="sedentario" />
             <Picker.Item label="Ligero" value="ligero" />
             <Picker.Item label="Moderado" value="moderado" />
