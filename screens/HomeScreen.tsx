@@ -19,9 +19,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <ImageBackground
-      source={require('../assets/enhanced-image.png')} // Reemplaza con la ruta correcta de tu imagen
-      // source={require('../assets/paper-fruits.png')} // Reemplaza con la ruta correcta de tu imagen
-      // source={require('../assets/clay-tree-enhanced-image.jpg')} // Reemplaza con la ruta correcta de tu imagen
+      source={require('../assets/enhanced-image.png')}
       style={homeStyles.backgroundImage}
     >
     <View style={homeStyles.container}>

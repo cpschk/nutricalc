@@ -4,6 +4,8 @@ import { Picker } from '@react-native-picker/picker';
 
 import { ImcTmbStyles } from '../styles/ImcTmbScreenStyle';
 
+import CustomModal from '../components/CustomModal';;
+
 const ImcTmbCalculate = () => {
   const [estatura, setEstatura] = useState<number>(0);
   const [peso, setPeso] = useState<number>(0);
@@ -93,6 +95,7 @@ const ImcTmbCalculate = () => {
 
   return (
     <ScrollView contentContainerStyle={ImcTmbStyles.container}>
+      <CustomModal />
       <View style={ImcTmbStyles.dataContainer}>
         <View style={ImcTmbStyles.data}>
           <Text style={ImcTmbStyles.label}>Estatura (cm):</Text>
