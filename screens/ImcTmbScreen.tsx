@@ -43,6 +43,7 @@ const ImcTmbCalculate = () => {
       'ligero': 1.375,
       'moderado': 1.55,
       'intenso': 1.725,
+      'extremadamente_activo': 1.9,
     };
   
     if (activityFactors.hasOwnProperty(nivelActividad)) {
@@ -162,6 +163,7 @@ const ImcTmbCalculate = () => {
             <Picker.Item label="Ligero" value="ligero" />
             <Picker.Item label="Moderado" value="moderado" />
             <Picker.Item label="Intenso" value="intenso" />
+            <Picker.Item label="Extremadamente activo" value="extremadamente_activo" />
           </Picker>
         </View>
         <View>
