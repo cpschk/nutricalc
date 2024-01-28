@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
@@ -95,6 +95,11 @@ const ImcTmbCalculate = () => {
     setIsVisible(!isVisible);
   };
 
+  // Declarar referencias para las entradas de texto
+  const pesoInputRef = useRef<TextInput>(null);
+  const edadInputRef = useRef<TextInput>(null);
+
+  
   return (
     <ScrollView contentContainerStyle={ImcTmbStyles.container}>
       <CustomModal />
@@ -114,10 +119,13 @@ const ImcTmbCalculate = () => {
               }
               setEstatura(num);
             }}
+            returnKeyType="next"
+            onSubmitEditing={() => pesoInputRef.current?.focus()}
           />
 
           <Text style={ImcTmbStyles.label}>Peso (kg):</Text>
           <TextInput
+            ref={pesoInputRef}
             style={ImcTmbStyles.input}
             keyboardType="numeric"
             placeholder="Ingrese el peso"
@@ -130,10 +138,13 @@ const ImcTmbCalculate = () => {
               }
               setPeso(num);
             }}
+            returnKeyType="next"
+            onSubmitEditing={() => edadInputRef.current?.focus()}
           />
 
           <Text style={ImcTmbStyles.label}>Edad:</Text>
           <TextInput
+            ref={edadInputRef}
             style={ImcTmbStyles.input}
             keyboardType="numeric"
             placeholder="Ingrese la edad"
