@@ -7,6 +7,8 @@ import LearnInfo from './screens/LearnScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import ImcTmbCalculate from './screens/ImcTmbScreen';
+import DiscoverScreen from './screens/DiscoverScreen';
+import ImproveScreen from './screens/ImproveScreen';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -38,9 +40,9 @@ const HomeStack = () => (
         headerShown: true,
       }}
     />
-    {/* <Stack.Screen
-      name="ResultScreen"
-      component={ResultScreen}
+    <Stack.Screen
+      name="DiscoverScreen"
+      component={DiscoverScreen}
       options={{
         headerBackTitle: 'Volver', 
         headerTitle: '',
@@ -48,14 +50,14 @@ const HomeStack = () => (
       }}
     />
     <Stack.Screen
-      name="ResultScreen"
-      component={ResultScreen}
+      name="ImproveScreen"
+      component={ImproveScreen}
       options={{
         headerBackTitle: 'Volver', 
         headerTitle: '',
         headerShown: true,
-      }}
-    /> */}
+      }} 
+    />
   </Stack.Navigator>
 );
 

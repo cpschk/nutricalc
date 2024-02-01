@@ -11,7 +11,7 @@ const HomeScreen = ({ navigation }) => {
     } else if (id === 'aprende') {
       navigation.navigate('LearnInfo');
     } else if (id === 'descubre') {
-      navigation.navigate('LearnInfo');
+      navigation.navigate('DiscoverScreen');
     } else if (id === 'mejora') {
       navigation.navigate('LearnInfo');
     }

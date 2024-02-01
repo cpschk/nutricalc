@@ -4,7 +4,7 @@ import { Picker } from '@react-native-picker/picker';
 
 import { ImcTmbStyles } from '../styles/ImcTmbScreenStyle';
 
-import CustomModal from '../components/CustomModal';;
+import CustomModal from '../components/CustomModal';
 
 const ImcTmbCalculate = () => {
   const [estatura, setEstatura] = useState<number>(0);
@@ -26,17 +26,40 @@ const ImcTmbCalculate = () => {
     return true;
   };
 
+  const handleResult = () => {
+    if (!validarCampo(estatura.toString(), 'Por favor, ingrese la estatura.')) return;
+    if (!validarCampo(peso.toString(), 'Por favor, ingrese el peso.')) return;
+    if (!validarCampo(edad, 'Por favor, ingrese la edad.')) return;
+    if (!validarCampo(genero, 'Por favor, selecciona genero.')) return;
+    if (!validarCampo(nivelActividad, 'Por favor, selecciona nivel de actividad fisica.')) return;
+
+    const bmi = peso / ((estatura / 100) * (estatura / 100));
+
+    setBmi(bmi);
+    setrangoIMC(determinarRangoIMC(bmi));
+    calcularTmb(genero, peso, estatura, Number(edad));
+
+    console.log('Estatura:', estatura);
+    console.log('Peso:', peso);
+    console.log('Edad:', edad);
+    console.log('Género:', genero);
+    console.log('Nivel de actividad física:', nivelActividad);
+    console.log('IMC:', bmi);
+    setIsVisible(!isVisible);
+  };
+
   const calcularTmb = (genero: string, peso: number, estatura: number, edad: number): void => {
     let calculatedTmb: number;
     if (genero.toLowerCase() === 'masculino') {
-      calculatedTmb = 88.362 + 13.397 * peso + 4.799 * estatura - 5.677 * edad;
+      calculatedTmb = 88.362 + (13.397 * peso) + (4.799 * estatura) - (5.677 * edad);
     } else if (genero.toLowerCase() === 'femenino') {
-      calculatedTmb = 447.593 + 9.247 * peso + 3.098 * estatura - 4.330 * edad;
+      calculatedTmb = 447.593 + (9.247 * peso) + (3.098 * estatura) - (4.330 * edad);
     }
+    console.log('TMB:', calculatedTmb);
     setTmbResult(calculatedTmb);
-    calculateCaloriesWithActivity(calculatedTmb); // Llama a la función aquí
+    calculateCaloriesWithActivity(calculatedTmb);
   };
-  
+
   const calculateCaloriesWithActivity = (tmbResult: number) => {
     const activityFactors = {
       'sedentario': 1.2,
@@ -57,7 +80,9 @@ const ImcTmbCalculate = () => {
     } else {
       console.error('Nivel de actividad física no válido.');
     }
+    console.log('Calories with activity:', caloriesWithActivity);
   };
+  
 
   const determinarRangoIMC = (imc: number): string => {
     if (imc < 18.5) {
@@ -75,25 +100,7 @@ const ImcTmbCalculate = () => {
     }
   };
 
-  const handleResult = () => {
-    if (!validarCampo(estatura.toString(), 'Por favor, ingrese la estatura.')) return;
-    if (!validarCampo(peso.toString(), 'Por favor, ingrese el peso.')) return;
-    if (!validarCampo(edad, 'Por favor, ingrese la edad.')) return;
-    if (!validarCampo(genero, 'Por favor, selecciona genero.')) return;
-    if (!validarCampo(nivelActividad, 'Por favor, selecciona nivel de actividad fisica.')) return;
 
-    const bmi = peso / ((estatura / 100) * (estatura / 100));
-
-    setBmi(bmi);
-    setrangoIMC(determinarRangoIMC(bmi));
-    calcularTmb(genero, peso, estatura, Number(edad));
-
-    // console.log('Estatura:', estatura);
-    // console.log('Peso:', peso);
-    // console.log('Edad:', edad);
-    // console.log('Género:', genero);
-    setIsVisible(!isVisible);
-  };
 
   // Declarar referencias para las entradas de texto
   const pesoInputRef = useRef<TextInput>(null);
